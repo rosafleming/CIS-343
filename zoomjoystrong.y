@@ -1,6 +1,9 @@
 %{
-/*
- */
+/*************************************************************
+This program will write a program to let a user draw using
+rectangles, circles, points.
+By Rosa Fleming
+ *************************************************************/
 #include <stdio.h>
 #include "zoomjoystrong.tab.h"
 #include "zoomjoystrong.h"
@@ -33,6 +36,7 @@ program:
 };
 
 /***********************************************************
+Sets up the statement list
 ***********************************************************/
 statement_list:
 	statement {};
@@ -40,6 +44,7 @@ statement_list:
 	statement statement_list {};
 
 /***********************************************************
+ * Defines what a statement can be made up of
 ***********************************************************/
 statement:
 	point END_STATEMENT{}
@@ -51,12 +56,9 @@ statement:
 	rectangle END_STATEMENT{}
 	|
 	set_color END_STATEMENT{}
-	|
-	ERRTOK{
-		printf("Error");
-	};
 	
 /***********************************************************
+ Statement setting up the line function
 ***********************************************************/
 line:
 	LINE INTEGER INTEGER INTEGER INTEGER{
@@ -65,6 +67,7 @@ line:
 	};
 
 /***********************************************************
+Statement setting up the circle function
 ***********************************************************/
 circle:
 	CIRCLE INTEGER INTEGER INTEGER{	
@@ -72,6 +75,7 @@ circle:
 	};
 
 /************************************************************
+ Statement setting up the set_color function
 *************************************************************/
 set_color: 
 	SET_COLOR INTEGER INTEGER INTEGER{
@@ -83,6 +87,7 @@ set_color:
 	};
 
 /***********************************************************
+ Statement setting up the integer function
 ***********************************************************/
 point:
 	POINT INTEGER INTEGER {
@@ -94,6 +99,7 @@ point:
 	};
 
 /***********************************************************
+ Statement setting up the rectangle function
 ***********************************************************/
 rectangle:
 	RECTANGLE INTEGER INTEGER INTEGER INTEGER {
@@ -105,6 +111,7 @@ end:
 %%
 
 /**********************************************************************
+Checks that color input is valid
 ***********************************************************************/
 int colorCheck(int a, int b, int c){
 	if (a > 255 | a < 0)return 0;
@@ -114,6 +121,7 @@ int colorCheck(int a, int b, int c){
 }
 
 /************************************************************************
+ Checks that screen size input is valid
 *************************************************************************/
 int screenSizeCheck(int x, int y){
 	if (x > 1024 | y > 768) {
@@ -131,6 +139,7 @@ int yyerror (char const *s) {
  }
 
 /****************************************************************************
+ Main function to run the progrm
 **************************************************************************/
 int main (int argc, char **argv){
 	setup();
